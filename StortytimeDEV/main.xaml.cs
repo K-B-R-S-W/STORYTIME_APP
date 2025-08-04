@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +22,57 @@ namespace StortytimeDEV
     {
         public main()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+                InitializeUserControl();
+                this.Loaded += Main_Loaded;
+                this.Unloaded += Main_Unloaded;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to initialize main control: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void InitializeUserControl()
+        {
+            try
+            {
+                // Initialize any required resources or state
+                this.IsEnabled = true;
+                this.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to initialize user control: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Main_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Add any additional initialization that requires the visual tree
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load main control: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Main_Unloaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Clean up any resources
+                this.Loaded -= Main_Loaded;
+                this.Unloaded -= Main_Unloaded;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during cleanup: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

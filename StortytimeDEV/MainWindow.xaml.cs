@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using StortytimeDEV.view;
 
 namespace StortytimeDEV
 {
@@ -22,15 +23,78 @@ namespace StortytimeDEV
     {
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+                // Set window state
+                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                this.ResizeMode = ResizeMode.NoResize;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to initialize main window: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
+            try
             {
-                this.DragMove();
+                if (e.ChangedButton == MouseButton.Left)
+                {
+                    this.DragMove();
+                }
             }
+            catch (InvalidOperationException)
+            {
+                // Ignore drag operation if window is in an invalid state
+            }
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                LoginView loginView = new LoginView();
+                loginView.Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to logout: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                WindowState = WindowState.Minimized;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to minimize window: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to close application: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(1); // Force exit if normal shutdown fails
+            }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            // Cleanup any resources if needed
         }
     }
 }

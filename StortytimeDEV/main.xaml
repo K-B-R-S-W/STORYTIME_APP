@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="StortytimeDEV.main"
+﻿<UserControl x:Class="StortytimeDEV.Main"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,149 @@
              xmlns:local="clr-namespace:StortytimeDEV"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <!-- Welcome Message -->
+            <TextBlock Text="Have a Nice day, Admin"
+                     FontSize="32"
+                     FontWeight="Light"
+                     Margin="0,20,0,40"
+                     Foreground="White"/>
+
+            <!-- Now Playing Section -->
+            <TextBlock Text="Now Playing"
+                     FontSize="24"
+                     FontWeight="Bold"
+                     Margin="0,0,0,20"
+                     Foreground="White"/>
             
-    </Grid>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" 
+                         VerticalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="NowPlayingMovies">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="200" 
+                                    Margin="0,0,20,0"
+                                    Background="#1A1A1A"
+                                    CornerRadius="10">
+                                <StackPanel>
+                                    <Border Height="300" 
+                                            CornerRadius="10,10,0,0">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding PosterPath}" 
+                                                      Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <TextBlock Text="{Binding Title}" 
+                                             Margin="10,5" 
+                                             FontSize="14"
+                                             FontWeight="Bold"
+                                             TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding ReleaseDate}"
+                                             Margin="10,0,10,5"
+                                             FontSize="12"
+                                             Foreground="#666"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <!-- Upcoming Section -->
+            <TextBlock Text="Upcoming"
+                     FontSize="24"
+                     FontWeight="Bold"
+                     Margin="0,0,0,10"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Margin="0,0,0,30">
+                <ItemsControl x:Name="UpcomingMovies">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="350" 
+                                    Height="250" 
+                                    Margin="10" 
+                                    CornerRadius="10" 
+                                    Background="#1C1C1C"
+                                    Cursor="Hand">
+                                <StackPanel>
+                                    <Border Height="200" 
+                                            CornerRadius="10,10,0,0">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding PosterPath}" 
+                                                      Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <TextBlock Text="{Binding Title}" 
+                                             Margin="10,5" 
+                                             FontSize="14"
+                                             FontWeight="Bold"
+                                             TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding ReleaseDate}"
+                                             Margin="10,0,10,5"
+                                             FontSize="12"
+                                             Foreground="#666"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <!-- Popular Section -->
+            <TextBlock Text="Popular"
+                     FontSize="24"
+                     FontWeight="Bold"
+                     Margin="0,0,0,10"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Margin="0,0,0,30">
+                <ItemsControl x:Name="PopularMovies">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="350" 
+                                    Height="250" 
+                                    Margin="10" 
+                                    CornerRadius="10" 
+                                    Background="#1C1C1C"
+                                    Cursor="Hand">
+                                <StackPanel>
+                                    <Border Height="200" 
+                                            CornerRadius="10,10,0,0">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding PosterPath}" 
+                                                      Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <TextBlock Text="{Binding Title}" 
+                                             Margin="10,5" 
+                                             FontSize="14"
+                                             FontWeight="Bold"
+                                             TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding ReleaseDate}"
+                                             Margin="10,0,10,5"
+                                             FontSize="12"
+                                             Foreground="#666"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

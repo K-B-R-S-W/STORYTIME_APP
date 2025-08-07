@@ -166,46 +166,43 @@
                            HorizontalAlignment="Left"
                            Margin="0,35,0,0"/>
 
-                    <TextBox x:Name="txtuser"
+                    <Grid Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Image Source="/Images/userclour.png" 
+                               Height="20"
+                               Width="20"
+                               Margin="0,4,8,0"
+                               Grid.Column="0"/>
+                        
+                        <TextBox x:Name="txtuser"
+                               Grid.Column="1"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"
                              Foreground="White"
                              CaretBrush="LightGray"
-                             
                              BorderThickness="0,0,0,1"
                              Height="28"
                              VerticalContentAlignment="Center"
-                             Margin="0,5,0,0" 
-                             Padding="25,0,0,0" SelectionTextBrush="#FFA0A7A4">
-                        <TextBox.Style>
-                            <Style TargetType="TextBox">
-                                <Setter Property="BorderBrush" Value="#FF1947D8"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelectionActive" Value="True">
-                                        <Setter Property="BorderBrush" Value="#C62DAE" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
-                        
-                        
-                        
-                        
-                        <TextBox.Background>
-                            <ImageBrush Stretch="Uniform"
-                    AlignmentX="Left">
-                                <ImageBrush.ImageSource>
-                                    <BitmapImage UriSource="/Images/userclour.png" />
-
-                                </ImageBrush.ImageSource>
-                                <ImageBrush.Viewbox>
-                                    <Rect>-0.2, 0.5, 15, 0</Rect>
-
-                                </ImageBrush.Viewbox>
-                            </ImageBrush>
-                        </TextBox.Background>
-                    </TextBox>
+                             Padding="25,0,0,0" 
+                             Background="Transparent"
+                             SelectionTextBrush="#FFA0A7A4">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="BorderBrush" Value="#FF1947D8"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelectionActive" Value="True">
+                                            <Setter Property="BorderBrush" Value="#C62DAE" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
                     <TextBlock Text="Password"
                            Foreground="DarkGray"
                            FontSize="12"
@@ -214,43 +211,44 @@
                            HorizontalAlignment="Left"
                            Margin="0,10,0,0"/>
 
-                    <PasswordBox x:Name="txtpassword"
+                    <Grid Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Image Source="/Images/key.png" 
+                               Height="20"
+                               Width="20"
+                               Margin="0,4,8,0"
+                               Grid.Column="0"/>
+                        
+                        <PasswordBox x:Name="txtpassword"
+                               Grid.Column="1"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"
                              Foreground="White"
                              CaretBrush="LightGray"
-                            
                              BorderThickness="0,0,0,1"
                              Height="28"
                              VerticalContentAlignment="Center"
-                             Margin="0,5,0,0" 
-                             Padding="25,0,0,0" SelectionTextBrush="#FFA0A7A4">
-                        
-                        <PasswordBox.Style>
-                            <Style TargetType="PasswordBox">
-                                <Setter Property="BorderBrush" Value="#FF1947D8"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelectionActive" Value="True">
-                                        <Setter Property="BorderBrush" Value="#C62DAE" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </PasswordBox.Style>
-                        <PasswordBox.Background>
-                            <ImageBrush Stretch="Uniform"
-                    AlignmentX="Left">
-                                <ImageBrush.ImageSource>
-                                    <BitmapImage UriSource="/Images/key.png" />
-
-                                </ImageBrush.ImageSource>
-                                <ImageBrush.Viewbox>
-                                    <Rect>-0.2, 0.5, 15, 0</Rect>
-
-                                </ImageBrush.Viewbox>
-                            </ImageBrush>
-                        </PasswordBox.Background>
-                    </PasswordBox>
+                             Padding="25,0,0,0" 
+                             Background="Transparent"
+                             SelectionTextBrush="#FFA0A7A4">
+                            
+                            <PasswordBox.Style>
+                                <Style TargetType="PasswordBox">
+                                    <Setter Property="BorderBrush" Value="#FF1947D8"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelectionActive" Value="True">
+                                            <Setter Property="BorderBrush" Value="#C62DAE" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </PasswordBox.Style>
+                        </PasswordBox>
+                    </Grid>
 
                     <Button x:Name="btnlogin"
 

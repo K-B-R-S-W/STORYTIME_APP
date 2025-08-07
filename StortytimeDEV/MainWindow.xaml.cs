@@ -26,8 +26,19 @@ namespace StortytimeDEV
             try
             {
                 InitializeComponent();
+                
+                // Set initial content
+                MainContent.Content = new Main();
+                
                 // Set window state
                 this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                
+                MessageBox.Show("MainWindow initialized", "Debug");
+                
+                if (MainContent == null)
+                {
+                    MessageBox.Show("MainContent is null!", "Error");
+                }
                 this.ResizeMode = ResizeMode.NoResize;
             }
             catch (Exception ex)
@@ -95,6 +106,43 @@ namespace StortytimeDEV
         {
             base.OnClosed(e);
             // Cleanup any resources if needed
+        }
+
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (sender is Button button)
+                {
+                    // Reset all buttons to default style
+                    foreach (var child in ((StackPanel)button.Parent).Children)
+                    {
+                        if (child is Button menuButton)
+                        {
+                            menuButton.Style = (Style)FindResource("menuButton");
+                        }
+                    }
+
+                    // Set clicked button to active style
+                    button.Style = (Style)FindResource("menuButtonActive");
+
+                    // Navigate to the appropriate page
+                    switch (button.Name)
+                    {
+                        case "HomeButton":
+                            MainContent.Content = new Main();
+                            break;
+                        case "TrailersButton":
+                            MainContent.Content = new LatestTrailers();
+                            break;
+                        // Add other cases for additional pages
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to navigate: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

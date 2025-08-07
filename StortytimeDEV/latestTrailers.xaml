@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="StortytimeDEV.LatestTrailers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StortytimeDEV"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Storyboard x:Key="CardHoverAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                            To="-5" Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="CardUnhoverAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                            To="0" Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#FF121212">
+        <StackPanel Margin="40,15">
+            <TextBlock Text="Latest Trailers" 
+                     FontSize="36" 
+                     FontWeight="SemiBold"
+                     FontFamily="Segoe UI"
+                     Margin="0,0,0,30"
+                     Foreground="White">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="2" 
+                                    Direction="330" 
+                                    Color="Black" 
+                                    Opacity="0.3" 
+                                    BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            
+            <ItemsControl x:Name="TrailersItemsControl" Margin="0,0,0,20">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="360" 
+                                Height="280" 
+                                Margin="12" 
+                                CornerRadius="12" 
+                                Background="#FF1E1E1E"
+                                BorderThickness="1"
+                                BorderBrush="#FF2A2A2A"
+                                Cursor="Hand"
+                                Effect="{Binding RelativeSource={RelativeSource Self}, Path=Tag}">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="Border.MouseEnter">
+                                    <BeginStoryboard Storyboard="{StaticResource CardHoverAnimation}"/>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Border.MouseLeave">
+                                    <BeginStoryboard Storyboard="{StaticResource CardUnhoverAnimation}"/>
+                                </EventTrigger>
+                            </Border.Triggers>
+                            <StackPanel>
+                                <Border Height="220" 
+                                        CornerRadius="12,12,0,0"
+                                        MouseDown="Trailer_MouseDown"
+                                        Tag="{Binding TrailerKey}">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="15" 
+                                                        ShadowDepth="2" 
+                                                        Direction="270" 
+                                                        Color="Black" 
+                                                        Opacity="0.3"/>
+                                    </Border.Effect>
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding PosterPath}" 
+                                                  Stretch="UniformToFill"/>
+                                    </Border.Background>
+                                    <Grid Background="#90000000">
+                                        <Ellipse Width="60" 
+                                                 Height="60" 
+                                                 Fill="#CCFFFFFF"/>
+                                        <Path Data="M12,8 L12,24 L28,16 L12,8" 
+                                              Fill="#FF1E1E1E" 
+                                              Stretch="Uniform" 
+                                              Width="28" 
+                                              Height="28"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="4,0,0,0"/>
+                                    </Grid>
+                                </Border>
+                                <TextBlock Text="{Binding Title}" 
+                                         Margin="15,12" 
+                                         FontSize="16"
+                                         FontWeight="SemiBold"
+                                         TextWrapping="Wrap"
+                                         Foreground="White"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
+            <Button x:Name="SeeMoreButton" 
+                    Content="See More" 
+                    Width="180" 
+                    Height="48" 
+                    Margin="0,20,0,40"
+                    Click="SeeMoreButton_Click"
+                    FontSize="16"
+                    FontWeight="Medium"
+                    FontFamily="Segoe UI"
+                    Cursor="Hand"
+                    HorizontalAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#FF2D2D2D"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="24">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="10" 
+                                                            ShadowDepth="2" 
+                                                            Direction="315" 
+                                                            Color="Black" 
+                                                            Opacity="0.25"/>
+                                        </Border.Effect>
+                                        <ContentPresenter HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF3D3D3D"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                           To="-2"
+                                                           Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                           To="0"
+                                                           Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FF4D4D4D"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

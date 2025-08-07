@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StortytimeDEV"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent">
@@ -22,117 +23,101 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 35 0 0">
-                <Image Source="/Images/new.png" Width="150" Height="50" Stretch="Uniform"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Logo -->
+            <StackPanel Grid.Row="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 15 0 0">
+                    <Image Source="/Images/new.png" Width="150" Height="40" Stretch="Uniform"/>
+                </StackPanel>
+                <Separator Height="0.8" Margin="20 10" Background="#46558a"></Separator>
             </StackPanel>
-            <Separator Height="0.8" Margin="20 30" Background="#46558a"></Separator>
 
-            <!--menu items-->
+            <!-- Menu Items -->
+            <StackPanel Grid.Row="1" Margin="0 5 0 0">
 
-            <Button Style="{StaticResource menuButtonActive}">
+            <Button x:Name="HomeButton" Height="35" Margin="0 2" Style="{StaticResource menuButtonActive}" Click="MenuButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}" />
                     <TextBlock Text="HOME" Style="{StaticResource menuButtonText}" />
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource menuButton}">
+            <Button x:Name="TrailersButton" Height="35" Margin="0 2" Style="{StaticResource menuButton}" Click="MenuButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="Play" Style="{StaticResource menuButtonIcon}" />
+                    <TextBlock Text="LATEST TRAILERS" Style="{StaticResource menuButtonText}" />
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="BrowseButton" Height="35" Margin="0 2" Style="{StaticResource menuButton}" Click="MenuButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="Film" Style="{StaticResource menuButtonIcon}" />
                     <TextBlock Text="BROWSE" Style="{StaticResource menuButtonText}" />
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource menuButton}">
+            <Button x:Name="TrendingButton" Height="35" Margin="0 2" Style="{StaticResource menuButton}" Click="MenuButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="bolt" Style="{StaticResource menuButtonIcon}" />
                     <TextBlock Text="TRENDING" Style="{StaticResource menuButtonText}" />
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource menuButton}">
+            <Button Height="35" Margin="0 2" Style="{StaticResource menuButton}">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="Lightbulb" Style="{StaticResource menuButtonIcon}" />
                     <TextBlock Text="ABOUT US" Style="{StaticResource menuButtonText}" />
                 </StackPanel>
             </Button>
 
-            <Separator Height="0.8" Margin="20 40 20 20" Background="#46558a"/>
+            </StackPanel>
 
-            <Button Style="{StaticResource menuButton}" Click="LogoutButton_Click">
-                <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="SignOutAlt" Style="{StaticResource menuButtonIcon}" />
-                    <TextBlock Text="LOGOUT" Style="{StaticResource menuButtonText}" />
-                </StackPanel>
-            </Button>
-        </StackPanel>
+            <!-- Logout Section -->
+            <StackPanel Grid.Row="2" Margin="0 0 0 10">
+                <Separator Height="0.8" Margin="20 5" Background="#46558a"/>
+                <Button Height="35" Margin="0 2" Style="{StaticResource menuButton}" Click="LogoutButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="SignOutAlt" Style="{StaticResource menuButtonIcon}" />
+                        <TextBlock Text="LOGOUT" Style="{StaticResource menuButtonText}" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
 
         <!--main section-->
         <Border Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown">
-            <Border CornerRadius="10 0 0 10">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#1B1448" Offset="0" />
-                        <GradientStop Color="#462AD8" Offset="1" />
-                    </LinearGradientBrush>
-                </Border.Background>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#1B1448" Offset="0" />
+                    <GradientStop Color="#462AD8" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
 
-                <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="160"/>
-                <RowDefinition Height="145"/>
-                <RowDefinition Height="145"/>
-            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <!-- Window Control Buttons -->
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0">
-                <Button Style="{StaticResource windowControlButton}" Width="30" Height="30" Margin="0,0,5,0" Click="MinimizeButton_Click">
-                    <fa:IconImage Icon="WindowMinimize" Width="12" Height="12" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
-                </Button>
-                <Button Style="{StaticResource closeButton}" Width="30" Height="30" Click="CloseButton_Click">
-                    <fa:IconImage Icon="Xmark" Width="12" Height="12" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
-                </Button>
-            </StackPanel>
+                <!-- Window Control Buttons -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0">
+                    <Button Style="{StaticResource windowControlButton}" Width="30" Height="30" Margin="0,0,5,0" Click="MinimizeButton_Click">
+                        <fa:IconImage Icon="WindowMinimize" Width="12" Height="12" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
+                    </Button>
+                    <Button Style="{StaticResource closeButton}" Width="30" Height="30" Click="CloseButton_Click">
+                        <fa:IconImage Icon="Xmark" Width="12" Height="12" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
+                    </Button>
+                </StackPanel>
 
-            <TextBlock Text="Have a Nice day , Admin" FontSize="19" Foreground="#ccd7ff" HorizontalAlignment="Left" Margin="18,19,0,0" Grid.Row="1"/>
-
-                    <!--<Separator Height="0.8" Margin="15 50" Background="#46558a"></Separator>-->
-
-                    <Grid Grid.Row="1" Margin="0 50 0 0">
-                        
-                        
-                        
-                        
-                        
-                    </Grid>
-
-
-
-
-
-
-
-
-
-                    <!--<Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="150"/>
-                       
-                        
-                        
-
-
-                    </Grid.ColumnDefinitions>-->
-                    
-                </Grid>
-                
-                
-                
-            </Border>
+                <!-- Main content -->
+                <ContentControl Grid.Row="1" x:Name="MainContent" Margin="10"/>
+            </Grid>
         </Border>
     </Grid>
 </Window>
